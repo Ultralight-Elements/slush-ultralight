@@ -147,7 +147,7 @@ gulp.task('sauce', function(done) {
   }
 })
 
-gulp.task('build', function(done) {runSequence('build-element', 'zip-dist', done)})
+gulp.task('build', ['build-element'])
 gulp.task('test-local', function(done) {runSequence('build-element', 'browser-sync', done)})
 gulp.task('test-sauce', ['sauce'])
 gulp.task('release-patch', function(done) {runSequence('bump-patch', 'tag', 'npm', done)})
