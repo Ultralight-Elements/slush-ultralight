@@ -76,7 +76,8 @@ gulp.task('default', function(done) {
     default: 'MIT'
   }, {
     name: 'copyrightHolder',
-    message: 'Copyright Holder:'
+    message: 'Copyright Holder:',
+    default: 'The Ultralight-Elements authors'
   }]
 
   inquirer.prompt(prompts, function(answers) {

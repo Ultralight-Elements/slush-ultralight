@@ -2,3 +2,4 @@ bower_components/
 node_modules/
 .tmp/
 .sauce.json
+ult-foo/
