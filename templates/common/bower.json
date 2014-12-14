@@ -1,0 +1,16 @@
+{
+  "name": "<%= githubRepository %>",
+  "version": "<%= elementVersion %>",
+  "description": "<%= elementDescription %>",
+  <% if (license === 'MIT') { %>"license": "MIT",<% } %>
+  "main": "dist/<%= elementName %>.js",
+  "keywords": [
+    "web-components"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {}
+}

@@ -1,0 +1,40 @@
+{
+  "name": "slush-ultralight",
+  "description": "A slush generator of VanillaJS custom elements for Ultralight-Elements based on slush-element",
+  "version": "0.1.0",
+  "homepage": "https://github.com/Ultralight-Elements/slush-ultralight",
+  "author": {
+    "name": "The Ultralight-Elements authors",
+    "email": "cledev@mail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Ultralight-Elements/slush-ultralight.git"
+  },
+  "bugs": {
+    "url": "https://github.com/webcomponents/slush-element/issues"
+  },
+  "license": "MIT",
+  "main": "slushfile.js",
+  "dependencies": {
+    "gulp": "^3.8.7",
+    "gulp-conflict": "^0.3.0",
+    "gulp-install": "^0.2.0",
+    "gulp-rename": "^1.2.0",
+    "gulp-template": "^1.0.0",
+    "inquirer": "^0.8.0",
+    "underscore.string": "^2.3.3",
+    "iniparser": "^1.0.5"
+  },
+  "keywords": [
+    "slushgenerator",
+    "webcomponents",
+    "web-components",
+    "web components",
+    "custom-elements",
+    "custom elements",
+    "polymer",
+    "x-tag",
+    "gulp"
+  ]
+}

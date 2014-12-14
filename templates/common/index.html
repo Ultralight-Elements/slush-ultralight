@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>&lt;<%= githubRepository %>&gt;</title>
+
+    <!-- Importing Custom Element's Polyfill -->
+    <script src="bower_components/ultralight-platform/ultralight-platform.min.js"></script>
+
+    <!-- Importing Custom Elements -->
+    <script src="dist/<%= elementName %>.js">
+</head>
+<body>
+
+    <!-- Using Custom Elements -->
+    <<%= elementName %>></<%= elementName %>>
+
+</body>
+</html>
