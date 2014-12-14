@@ -1,16 +1,37 @@
 {
   "name": "<%= githubRepository %>",
-  "version": "<%= elementVersion %>",
   "description": "<%= elementDescription %>",
-  <% if (license === 'MIT') { %>"license": "MIT",<% } %>
+  "version": "<%= elementVersion %>",
   "main": "dist/<%= elementName %>.js",
+  <% if (license === 'MIT') { %>"license": "MIT",<% } %>
   "keywords": [
-    "web-components"
+    "web-components",
+    "webcomponents",
+    "web components",
+    "custom-elements",
+    "customelements",
+    "custom elements",
+    "elements",
+    "ultra-light",
+    "ultralight",
+    "ultralight-elements",
+    "ultralightelements",
+    "polymer",
+    "x-tags",
+    "bosonic",
+    "brick"
   ],
   "ignore": [
     "**/.*",
     "node_modules",
-    "bower_components"
+    "bower_components",
+    "gulpfile.js",
+    "index.html",
+    "package.json",
+    "src",
+    "tests"
   ],
-  "dependencies": {}
+  "dependencies": {
+    "ultralight-platform": "Ultralight-Elements/ultralight-platform"
+  }
 }

@@ -1,7 +1,8 @@
 {
   "name": "<%= elementName %>",
-  "description": "<%= elementDescription %>",
   "version": "<%= elementVersion %>",
+  "description": "<%= elementDescription %>",
+  "main": "dist/<%= elementName %>.js",
   "homepage": "https://github.com/<%= githubUsername %>/<%= githubRepository %>",
   "author": {
     "name": "<%= githubUsername %>",
@@ -24,11 +25,30 @@
     "gulp-size": "^1.1.0",
     "gulp-sourcemaps": "^1.2.8",
     "gulp-uglify": "^1.0.2",
+    "gulp-util": "^3.0.1",
+    "gulp-zip": "^2.0.2",
     "intern": "^2.2.2",
     "run-sequence": "^1.0.2",
     "ultralight-platform": "Ultralight-Elements/ultralight-platform",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.0.0"
-  }<% if (license === 'MIT') { %>, 
+  },   
+  "keywords": [
+    "web-components",
+    "webcomponents",
+    "web components",
+    "custom-elements",
+    "customelements",
+    "custom elements",
+    "elements",
+    "ultra-light",
+    "ultralight",
+    "ultralight-elements",
+    "ultralightelements",
+    "polymer",
+    "x-tags",
+    "bosonic",
+    "brick"
+  ]<% if (license === 'MIT') { %>, 
   "license": "MIT"  <% } %>
 }

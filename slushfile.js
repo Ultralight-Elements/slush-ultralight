@@ -1,16 +1,15 @@
 'use strict'
 
 var fs = require('fs')
-
-var fs = require('fs'),
-    gulp = require('gulp'),
-    install = require('gulp-install'),
-    conflict = require('gulp-conflict'),
-    template = require('gulp-template'),
-    rename = require('gulp-rename'),
-    _ = require('underscore.string'),
-    inquirer = require('inquirer'),
-    iniparser = require('iniparser')
+var gulp = require('gulp')
+var gutil = require('gulp-util')
+var install = require('gulp-install')
+var conflict = require('gulp-conflict')
+var template = require('gulp-template')
+var rename = require('gulp-rename')
+var _ = require('underscore.string')
+var inquirer = require('inquirer')
+var iniparser = require('iniparser')
 
 var isTrue = function(v) {
   return v === true ||
@@ -134,3 +133,59 @@ gulp.task('element', function(done) {
       })
   })
 })
+
+gulp.task('bower-register', function(done) {
+
+  var prompts = [{
+    name: 'packageName',
+    message: 'Package Name:',
+    default: defaults.workingDirName
+  },  {
+    name: 'githubUsername',
+    message: 'GitHub Username:',
+    default: defaults.userName
+  }]
+
+  inquirer.prompt(prompts, function(answers) {
+    require('child_process').spawn('bower',
+      [
+        'register',
+        answers.packageName,
+        'git://github.com/' + answers.githubUsername +
+          '/' + answers.packageName + '.git'
+      ],  {stdio: 'inherit'})
+    .on('close', done)
+    .on('error', function() {
+      gutil.log('Error registering ' + answers.packageName + ' with bower.')
+      done()
+    })
+  })
+})
+
+gulp.task('sauce-setup', function(done) {
+
+  var prompts = [{
+    name: 'sauceName',
+    message: 'This is ignored by git, npm and bower.\n Saucelabs Account Name:',
+    default: defaults.userName
+  }, {
+    name: 'sauceKey',
+    message: 'Saucelabs Access Key:'
+  }]
+
+  inquirer.prompt(prompts, function(answers) {
+    fs.writeFile(
+      '.sauce.json',
+      JSON.stringify({account: answers.sauceName, key: answers.sauceKey}),
+      function(err) {
+        if (!err) {
+          gutil.log(
+            'Ready for local testing against Sauce labs.\n' +
+            'See tests/intern.js for preconfigured browsers.')
+          done()
+        }
+      })
+  })
+})
+
+gulp.task('npm-register', function(done) {})

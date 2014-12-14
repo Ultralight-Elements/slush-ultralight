@@ -1,4 +1,7 @@
-var gulp = require('gulp');
+var fs = require('fs')
+var path = require('path')
+var gulp = require('gulp')
+var gutil = require('gulp-util')
 var browserify = require('browserify')
 var source = require('vinyl-source-stream')
 var buffer = require('vinyl-buffer')
@@ -10,7 +13,7 @@ var size = require('gulp-size')
 var bump = require('gulp-bump')
 var git = require('gulp-git')
 var runSequence = require('run-sequence')
-
+var zip = require('gulp-zip')
 // var connect = require('gulp-connect-multi')();
 // var ghpages = require('gh-pages');
 // var clean = require('gulp-clean');
@@ -69,6 +72,15 @@ gulp.task('build-element', function() {
   return minBundle()
 })
 
+gulp.task('zip-dist', function() {
+  return gulp.src([
+    'dist/**/*.js',
+    'dist/**/*.map'
+  ], {base: '.'})
+  .pipe(zip('dist.zip'))
+  .pipe(gulp.dest('dist'))
+})
+
 gulp.task('bump-patch', function() {
   return gulp.src(['./package.json', './bower.json'])
     .pipe(bump())
@@ -104,11 +116,43 @@ gulp.task('npm', function (done) {
     .on('close', done)
 })
 
-gulp.task('build', ['build-element'])
-gulp.task('test-local', ['browser-sync'])
-gulp.task('release-patch', function(cb) {runSequence('bump-patch', 'tag', 'npm', cb)})
-gulp.task('release-minor', function(cb) {runSequence('bump-minor', 'tag', 'npm', cb)})
-gulp.task('release-major', function(cb) {runSequence('bump-major', 'tag', 'npm', cb)})
+gulp.task('sauce', function(done) {
+  var envConfig, saucefile = '.sauce.json'
+
+  if ((process.env.SAUCE_USERNAME && process.env.SAUCE_ACCESS_KEY)) {
+     callSauceFromIntern()
+  } else if (fs.existsSync(saucefile)) {
+    fs.readFile(saucefile, function(err, data) {
+      if (err) throw err
+      envConfig = JSON.parse(data)
+      //could be more rigorous below
+      if (envConfig) {
+        process.env.SAUCE_USERNAME = envConfig.account
+        process.env.SAUCE_ACCESS_KEY = envConfig.key
+      } else {
+        throw 'Error'
+      }
+      callSauceFromIntern()        
+    })
+  } else {
+    gutil.log('\nFile .sauce.json not found.\n' +
+              'Sauce env variables not found.\n' +
+              'Run "slush ultralight:sauce-setup" to configure ')
+    done()
+  }
+
+  function callSauceFromIntern () {
+    require('child_process').spawn('./node_modules/.bin/intern-runner', ['config=tests/intern'], { stdio: 'inherit', env: process.env })
+      .on('close', done)
+  }
+})
+
+gulp.task('build', function(done) {runSequence('build-element', 'zip-dist', done)})
+gulp.task('test-local', function(done) {runSequence('build-element', 'browser-sync', done)})
+gulp.task('test-sauce', ['sauce'])
+gulp.task('release-patch', function(done) {runSequence('bump-patch', 'tag', 'npm', done)})
+gulp.task('release-minor', function(done) {runSequence('bump-minor', 'tag', 'npm', done)})
+gulp.task('release-major', function(done) {runSequence('bump-major', 'tag', 'npm', done)})
 
 
 // https://github.com/gulpjs/gulp/blob/master/docs/recipes/browserify-uglify-sourcemap.md

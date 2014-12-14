@@ -17,3 +17,4 @@ document.registerElement('<%= elementName %>', {
   prototype: element
 })
 
+module.exports = element
