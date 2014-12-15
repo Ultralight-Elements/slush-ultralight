@@ -1,12 +1,12 @@
+complex prototype
 READMES
 badges for elements
-gh-pages
-complex prototype
 talk about UMD
 add mention of travis.yml/saucelabs procedure
-use ssh or https?
 'use strict'
 o add more license options
+x gh-pages
+x use ssh or https?
 x zip line 22 templates/README
 x register npm
 x test generator

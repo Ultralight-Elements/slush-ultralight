@@ -70,7 +70,7 @@ gulp.task('default', function(done) {
     default: defaults.workingDirName
   }, {
     name: 'gitInit',
-    message: 'initialize local git repository?',
+    message: 'Initialize local git repository?',
     default: 'yes'
   }, {
     type: 'list',
