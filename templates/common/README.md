@@ -1,4 +1,7 @@
-# &lt;<%= githubRepository %>&gt;
+# &lt;<%= elementName %>&gt;
+[![NPM version](http://img.shields.io/npm/v/<%= githubRepository %>.svg?style=flat)](http://npmjs.org/<%= githubRepository %>)
+[![NPM downloads](http://img.shields.io/npm/dm/<%= githubRepository %>.svg?style=flat)](http://npmjs.org/<%= githubRepository %>)
+[![Dependency Status](http://img.shields.io/david/<%= githubFullRepoName %>.svg?style=flat)](https://david-dm.org/<%= githubFullRepoName %>)
 
 > <%= elementDescription %>
 

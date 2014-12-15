@@ -1,4 +1,5 @@
 complex prototype
+inny/outy style
 READMES
 badges for elements
 talk about UMD

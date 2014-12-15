@@ -10,8 +10,7 @@ var rename = require('gulp-rename')
 var _ = require('underscore.string')
 var inquirer = require('inquirer')
 var iniparser = require('iniparser')
-var git = require('gulp-git')
-var gulpif = require('gulp-if')
+var cp = require('child_process')
 
 var isTrue = function(v) {
   return v === true ||
@@ -66,9 +65,14 @@ gulp.task('default', function(done) {
     default: defaults.userName
   }, {
     name: 'githubRepository',
-    message: 'GitHub Repository Name:',
+    message: 'GitHub Repo Name:',
     default: defaults.workingDirName
   }, {
+    name: 'githubFullRepoName',
+    message: 'Full GitHub Repository Name',
+    default: defaults.userName + '/' + defaults.workingDirName
+  },
+  {
     name: 'gitInit',
     message: 'Initialize local git repository?',
     default: 'yes'
@@ -117,33 +121,47 @@ gulp.task('default', function(done) {
       .pipe(conflict('./'))
       .pipe(gulp.dest('./'))
       .pipe(install())
-      .on('end', function() {
+      .on('finish', function() {
+        var url
         if (isTrue(answers.gitInit)) {
-          gulp.src('./')
-            .pipe(git.init())
-            .pipe(git.add({args: '-A'}))
-            .pipe(git.commit('initial commit'))
-            .pipe(gulpif((answers.gitProtocol &&
-                          answers.gitProtocol === 'https'),
-                          git.addRemote('origin', 'https://github.com/' +
-                                                   answers.githubUsername +
-                                                   '/' +
-                                                   answers.githubRepository)))
-            .pipe(gulpif((answers.gitProtocol &&
-                          answers.gitProtocol === 'ssh'),
-                          git.addRemote('origin', 'git://github.com/' +
-                                                   answers.githubUsername +
-                                                   '/' +
-                                                   answers.githubRepository +
-                                                  '.git')))
-            .pipe(gulpif(isTrue(answers.githubPages)),
-                  git.checkout('gh-pages', {args: '--orphan'}))
-            .pipe(gulpif(isTrue(answers.githubPages)),
-                  git.commit('add gh-pages branch'))
-            .pipe(gulpif(isTrue(answers.githubPages)),
-                  git.checkout('master'))
+          cp.spawn('git', ['init']).on('close', function() {
+            cp.spawn('git', ['add', '-A']).on('close', function() {
+              cp.spawn('git', ['commit', '-m"initial commit"']).on('close', function() {
+                if (answers.gitProtocol === 'https') {
+                  url = 'https://github.com/' +  answers.githubFullRepoName
+                  cp.spawn('git', ['remote', 'add', 'origin', url]).on('close', function() {
+                    if (isTrue(answers.githubPages)) {
+                      cp.spawn('git', ['checkout', '--orphan', 'gh-pages']).on('close', function() {
+                        cp.spawn('git', ['add', '-A']).on('close', function() {
+                          cp.spawn('git', ['commit', '-m"initial gh-pages commit"']).on('close', function() {
+                            cp.spawn('git', ['checkout', 'master']).on('close', function() {
+                              done()
+                            })
+                          })
+                        })
+                      })
+                    }
+                  })
+                  } else if (answers.gitProtocol === 'ssh') {
+                    url = 'git@github.com:' + answers.githubFullRepoName + '.git'
+                    cp.spawn('git', ['remote', 'add', 'origin', url]).on('close', function() {
+                      if (isTrue(answers.githubPages)) {
+                        cp.spawn('git', ['checkout', '--orphan', 'gh-pages']).on('close', function() {
+                          cp.spawn('git', ['add', '-A']).on('close', function() {
+                            cp.spawn('git', ['commit', '-m"initial gh-pages commit"']).on('close', function() {
+                              cp.spawn('git', ['checkout', 'master']).on('close', function() {
+                                done()
+                              })
+                            })
+                          })
+                        })
+                      }
+                    })
+                  }
+              })
+            })
+          })
         }
-        done()
       })
   })
 })
