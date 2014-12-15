@@ -14,10 +14,7 @@ var bump = require('gulp-bump')
 var git = require('gulp-git')
 var runSequence = require('run-sequence')
 var zip = require('gulp-zip')
-// var connect = require('gulp-connect-multi')();
 // var ghpages = require('gh-pages');
-// var clean = require('gulp-clean');
-// var path = require('path');
 
 gulp.task('browser-sync', function() {
   browserSync({
@@ -157,43 +154,13 @@ gulp.task('release-major', function(done) {runSequence('bump-major', 'tag', 'npm
 
 // https://github.com/gulpjs/gulp/blob/master/docs/recipes/browserify-uglify-sourcemap.md
 
-// var copy = function() {
-//   gulp.src([
-//     'bower_components/**/*',
-//     'demo/*',
-//     'src/*',
-//     'index.html'
-//     ], {
-//       base: './'
-//     })
-//     .pipe(gulp.dest('./.tmp/'));
-// }
-
-// var ignore = function() {
-//   gulp.src(['./.tmp/bower_components/<%= githubRepository %>'])
-//     .pipe(clean());
-// }
-
-// gulp.task('server', connect.server({
-//   root: [__dirname],
-//   port: 8000,
-//   livereload: true
-// }))
-
-// gulp.task('beforebuild', function() {
-//   copy()
-//   ignore()
-// })
-
 // gulp.task('deploy', ['beforebuild'], function () {
-
 //   ghpages.publish(path.join(__dirname, '.tmp/'), {
 //       clone: 'bower_components/<%= githubRepository %>',
 //       logger: function(message) {
 //         console.log(message)
 //       }
 //   } , function(err) {
-
 //     console.log('');
 //     if (err.errno === 34) {
 //       console.log('Error: You need run "gulp build" before deploy your custom element in gh-pages.\n')

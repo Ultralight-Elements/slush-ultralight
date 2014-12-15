@@ -10,6 +10,8 @@ var rename = require('gulp-rename')
 var _ = require('underscore.string')
 var inquirer = require('inquirer')
 var iniparser = require('iniparser')
+var git = require('gulp-git')
+var gulpif = require('gulp-if')
 
 var isTrue = function(v) {
   return v === true ||
@@ -67,6 +69,22 @@ gulp.task('default', function(done) {
     message: 'GitHub Repository Name:',
     default: defaults.workingDirName
   }, {
+    name: 'gitInit',
+    message: 'initialize local git repository?',
+    default: 'yes'
+  }, {
+    type: 'list',
+    name: 'gitProtocol',
+    message: 'Connect with https or ssh?',
+    choices: ['https', 'ssh']
+  }, {
+    name: 'githubPages',
+    message: 'Initialize Github Pages?',
+    default: 'yes',
+    when: function(answers) {
+      return answers.gitInit
+    }
+  }, {
     name: 'githubEmail',
     message: 'Email:',
     default: defaults.authorEmail
@@ -100,6 +118,31 @@ gulp.task('default', function(done) {
       .pipe(gulp.dest('./'))
       .pipe(install())
       .on('end', function() {
+        if (isTrue(answers.gitInit)) {
+          gulp.src('./')
+            .pipe(git.init())
+            .pipe(git.add({args: '-A'}))
+            .pipe(git.commit('initial commit'))
+            .pipe(gulpif((answers.gitProtocol &&
+                          answers.gitProtocol === 'https'), 
+                          git.addRemote('origin', 'https://github.com/' +
+                                                   answers.githubUsername +
+                                                   '/' +
+                                                   answers.githubRepository)))
+            .pipe(gulpif((answers.gitProtocol &&
+                          answers.gitProtocol === 'ssh'), 
+                          git.addRemote('origin', 'git://github.com/' +
+                                                   answers.githubUsername +
+                                                   '/' +
+                                                   answers.githubRepository +
+                                                  '.git')))
+            .pipe(gulpif(isTrue(answers.githubPages)),
+                  git.checkout('gh-pages', {args: '--orphan'}))
+            .pipe(gulpif(isTrue(answers.githubPages)),
+                  git.commit('add gh-pages branch'))
+            .pipe(gulpif(isTrue(answers.githubPages)),
+                  git.checkout('master'))
+        }
         done()
       })
   })
