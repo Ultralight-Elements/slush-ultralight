@@ -1,11 +1,13 @@
 complex prototype
 inny/outy style
 READMES
-badges for elements
+name the tasks well
 talk about UMD
 add mention of travis.yml/saucelabs procedure
 'use strict'
 o add more license options
+o put deps in 'store' file bak in package.json
+x badges for elements
 x gh-pages
 x use ssh or https?
 x zip line 22 templates/README

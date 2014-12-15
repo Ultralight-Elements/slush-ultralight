@@ -74,19 +74,22 @@ gulp.task('default', function(done) {
   },
   {
     name: 'gitInit',
-    message: 'Initialize local git repository?',
+    message: 'Initialize git repository?',
     default: 'yes'
   }, {
     type: 'list',
     name: 'gitProtocol',
     message: 'Connect with https or ssh?',
-    choices: ['https', 'ssh']
+    choices: ['https', 'ssh'],
+    when: function(answers) {
+      return isTrue(answers.gitInit)
+    }
   }, {
     name: 'githubPages',
     message: 'Initialize Github Pages?',
     default: 'yes',
     when: function(answers) {
-      return answers.gitInit
+      return isTrue(answers.gitInit)
     }
   }, {
     name: 'githubEmail',
