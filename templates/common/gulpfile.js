@@ -14,7 +14,7 @@ var bump = require('gulp-bump')
 var git = require('gulp-git')
 var runSequence = require('run-sequence')
 var zip = require('gulp-zip')
-// var ghpages = require('gh-pages');
+var ghpages = require('gulp-gh-pages');
 
 gulp.task('browser-sync', function() {
   browserSync({
@@ -144,15 +144,17 @@ gulp.task('sauce', function(done) {
   }
 })
 
+gulp.task('gh-pages', function() {
+  return gulp.src('./dist/**/*')
+    .pipe(ghpages())
+})
+
 gulp.task('build', ['build-element'])
 gulp.task('test-local', function(done) {runSequence('build-element', 'browser-sync', done)})
 gulp.task('test-sauce', ['sauce'])
 gulp.task('release-patch', function(done) {runSequence('bump-patch', 'tag', 'npm', done)})
 gulp.task('release-minor', function(done) {runSequence('bump-minor', 'tag', 'npm', done)})
 gulp.task('release-major', function(done) {runSequence('bump-major', 'tag', 'npm', done)})
-
-
-// https://github.com/gulpjs/gulp/blob/master/docs/recipes/browserify-uglify-sourcemap.md
 
 // gulp.task('deploy', ['beforebuild'], function () {
 //   ghpages.publish(path.join(__dirname, '.tmp/'), {
@@ -169,3 +171,5 @@ gulp.task('release-major', function(done) {runSequence('bump-major', 'tag', 'npm
 //     }
 //   }, true)
 // })
+
+// https://github.com/gulpjs/gulp/blob/master/docs/recipes/browserify-uglify-sourcemap.md

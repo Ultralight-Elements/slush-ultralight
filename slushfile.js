@@ -124,13 +124,13 @@ gulp.task('default', function(done) {
             .pipe(git.add({args: '-A'}))
             .pipe(git.commit('initial commit'))
             .pipe(gulpif((answers.gitProtocol &&
-                          answers.gitProtocol === 'https'), 
+                          answers.gitProtocol === 'https'),
                           git.addRemote('origin', 'https://github.com/' +
                                                    answers.githubUsername +
                                                    '/' +
                                                    answers.githubRepository)))
             .pipe(gulpif((answers.gitProtocol &&
-                          answers.gitProtocol === 'ssh'), 
+                          answers.gitProtocol === 'ssh'),
                           git.addRemote('origin', 'git://github.com/' +
                                                    answers.githubUsername +
                                                    '/' +
