@@ -1,5 +1,3 @@
-complex prototype
-inny/outy style
 READMES
   name the tasks well
   talk about UMD
@@ -7,6 +5,9 @@ READMES
 'use strict'
 o add more license options
 o put deps in 'store' file bak in package.json
+- register at customelements.io
+x complex prototype
+x inny/outy style
 x add 6to5
 x change browser-sync to connect
 x badges for elements
@@ -33,3 +34,4 @@ x package.json
 x bower
 x test phantomjs
 x add badges to readme
+

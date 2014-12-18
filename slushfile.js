@@ -52,6 +52,11 @@ gulp.task('default', function(done) {
     message: 'Element Name:',
     default: defaults.workingDirName
   }, {
+    type: 'list',
+    name: 'elementStyle',
+    message: 'Use simple style or compact defineProperties style?',
+    choices: ['simple', 'compact'],
+  }, {
     name: 'elementDescription',
     message: 'Element Description:',
     default: 'My awesome Custom Element'
@@ -108,6 +113,11 @@ gulp.task('default', function(done) {
   inquirer.prompt(prompts, function(answers) {
     var files = [];
     files.push(__dirname + '/templates/common/**')
+    if (answers.elementStyle === 'simple') {
+      files.push(__dirname + '/templates/srcs/simple/**')
+    } else if (answers.elementStyle === 'compact') {
+      files.push(__dirname + '/templates/srcs/compact/**')
+    }
     if (answers.license === 'MIT') {
       files.push(__dirname + '/templates/licenses/mit/LICENSE')
     }
@@ -174,12 +184,20 @@ gulp.task('element', function(done) {
     name: 'elementName',
     message: 'What"s the name of your element?',
     default: defaults.workingDirName
+  }, {
+    type: 'list',
+    name: 'elementStyle',
+    message: 'Use simple style or compact defineProperties style?',
+    choices: ['simple', 'compact'],
   }]
 
   inquirer.prompt(prompts, function(answers) {
     var files = [];
-    files.push(__dirname + '/templates/common/src/**')
-
+    if (answers.elementStyle === 'simple') {
+      files.push(__dirname + '/templates/srcs/simple/src/**')
+    } else if (answers.elementStyle === 'compact') {
+      files.push(__dirname + '/templates/srcs/compact/src/**')
+    }
     gulp.src(files)
       .pipe(template(answers))
       .pipe(rename(function(file) {
@@ -199,7 +217,7 @@ gulp.task('element', function(done) {
   })
 })
 
-gulp.task('bower-register', function(done) {
+gulp.task('register-bower', function(done) {
 
   var prompts = [{
     name: 'packageName',
@@ -227,7 +245,7 @@ gulp.task('bower-register', function(done) {
   })
 })
 
-gulp.task('sauce-setup', function(done) {
+gulp.task('setup-sauce', function(done) {
 
   var prompts = [{
     name: 'sauceName',
