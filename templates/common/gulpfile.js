@@ -7,7 +7,7 @@ var source = require('vinyl-source-stream')
 var buffer = require('vinyl-buffer')
 var uglify = require('gulp-uglify')
 var sourcemaps = require('gulp-sourcemaps')
-var browserSync = require('browser-sync')
+var connect = require('gulp-connect')
 var redirect = require('connect-redirection')
 var size = require('gulp-size')
 var bump = require('gulp-bump')
@@ -15,12 +15,15 @@ var git = require('gulp-git')
 var runSequence = require('run-sequence')
 var zip = require('gulp-zip')
 var ghpages = require('gulp-gh-pages');
+var to5Browserify = require('6to5-browserify')
 
-gulp.task('browser-sync', function() {
-  browserSync({
-    server: {
-      baseDir: './',
-      middleware: [
+gulp.task('connect', function() {
+  connect.server({
+    root: __dirname,
+    livereload: true,
+    port: 3000,
+    middleware: function(connect, opt){
+      return [
         redirect(),
         function(req, res, next) {
           if (req.url === '/') {
@@ -33,7 +36,7 @@ gulp.task('browser-sync', function() {
   })
 })
 
-gulp.task('build-element', function() {
+gulp.task('build-element-min', function() {
 
   var bundler = browserify({
     entries: ['./src/<%= elementName %>.js'],
@@ -41,19 +44,9 @@ gulp.task('build-element', function() {
     standalone: '<%= elementName %>'
   })
 
-  var bundle = function() {
-    return bundler
-      .bundle()
-      .pipe(source('<%= elementName %>.js'))
-      .pipe(buffer())
-      .pipe(sourcemaps.init({loadMaps: true}))
-        // Add transformation tasks to the pipeline here.
-      .pipe(sourcemaps.write('./'))
-      .pipe(gulp.dest('dist/'))
-  }
-
   var minBundle = function() {
     return bundler
+      .transform(to5Browserify)
       .bundle()
       .pipe(source('<%= elementName %>.min.js'))
       .pipe(buffer())
@@ -65,8 +58,30 @@ gulp.task('build-element', function() {
       .pipe(size({showFiles: true, gzip: true}))
   }
 
-  bundle()
   return minBundle()
+})
+
+gulp.task('build-element', function() {
+
+  var bundler = browserify({
+    entries: ['./src/<%= elementName %>.js'],
+    debug: true,
+    standalone: '<%= elementName %>'
+  })
+
+  var bundle = function() {
+    return bundler
+      .transform(to5Browserify)
+      .bundle()
+      .pipe(source('<%= elementName %>.js'))
+      .pipe(buffer())
+      .pipe(sourcemaps.init({loadMaps: true}))
+        // Add transformation tasks to the pipeline here.
+      .pipe(sourcemaps.write('./'))
+      .pipe(gulp.dest('dist/'))
+  }
+
+  return bundle()
 })
 
 gulp.task('zip-dist', function() {
@@ -150,26 +165,9 @@ gulp.task('gh-pages', function() {
 })
 
 gulp.task('build', ['build-element'])
-gulp.task('test-local', function(done) {runSequence('build-element', 'browser-sync', done)})
+gulp.task('test-local', function(done) {runSequence('build-element', 'connect', done)})
 gulp.task('test-sauce', ['sauce'])
 gulp.task('release-patch', function(done) {runSequence('bump-patch', 'tag', 'npm', done)})
 gulp.task('release-minor', function(done) {runSequence('bump-minor', 'tag', 'npm', done)})
 gulp.task('release-major', function(done) {runSequence('bump-major', 'tag', 'npm', done)})
 
-// gulp.task('deploy', ['beforebuild'], function () {
-//   ghpages.publish(path.join(__dirname, '.tmp/'), {
-//       clone: 'bower_components/<%= githubRepository %>',
-//       logger: function(message) {
-//         console.log(message)
-//       }
-//   } , function(err) {
-//     console.log('');
-//     if (err.errno === 34) {
-//       console.log('Error: You need run "gulp build" before deploy your custom element in gh-pages.\n')
-//     } else if (typeof err.errno === "undefined") {
-//       console.log('Error: You need add a remote repository before deploy your custom element in gh-pages.\n')
-//     }
-//   }, true)
-// })
-
-// https://github.com/gulpjs/gulp/blob/master/docs/recipes/browserify-uglify-sourcemap.md

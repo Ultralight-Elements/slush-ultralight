@@ -1,12 +1,14 @@
 complex prototype
 inny/outy style
 READMES
-name the tasks well
-talk about UMD
-add mention of travis.yml/saucelabs procedure
+  name the tasks well
+  talk about UMD
+  add mention of travis.yml/saucelabs procedure
 'use strict'
 o add more license options
 o put deps in 'store' file bak in package.json
+x add 6to5
+x change browser-sync to connect
 x badges for elements
 x gh-pages
 x use ssh or https?
