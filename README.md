@@ -94,7 +94,7 @@ $ slush ultralight:setup-sauce
     after which, you may use:
 
     ```sh
-$ gulp sauce
+$ gulp test-sauce
     ```
 
     from within your created project to initiate tests directly from your machine to saucelab's suite of browsers
