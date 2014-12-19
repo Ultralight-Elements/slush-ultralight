@@ -160,7 +160,7 @@ gulp.task('sauce', function(done) {
 })
 
 gulp.task('gh-pages', function() {
-  return gulp.src('./dist/**/*')
+  return gulp.src('./**/*')
     .pipe(ghpages())
 })
 
@@ -170,4 +170,3 @@ gulp.task('test-sauce', ['sauce'])
 gulp.task('release-patch', function(done) {runSequence('bump-patch', 'tag', 'npm', done)})
 gulp.task('release-minor', function(done) {runSequence('bump-minor', 'tag', 'npm', done)})
 gulp.task('release-major', function(done) {runSequence('bump-major', 'tag', 'npm', done)})
-
