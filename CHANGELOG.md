@@ -1,3 +1,4 @@
+register npm
 READMES
   name the tasks well
   talk about UMD
@@ -14,7 +15,6 @@ x badges for elements
 x gh-pages
 x use ssh or https?
 x zip line 22 templates/README
-x register npm
 x test generator
 x test server
 x DUH, switch to JSON file, lol!
