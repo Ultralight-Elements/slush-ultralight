@@ -145,10 +145,12 @@ gulp.task('default', function(done) {
                   cp.spawn('git', ['remote', 'add', 'origin', url]).on('close', function() {
                     if (isTrue(answers.githubPages)) {
                       cp.spawn('git', ['checkout', '--orphan', 'gh-pages']).on('close', function() {
-                        cp.spawn('git', ['add', '-A']).on('close', function() {
-                          cp.spawn('git', ['commit', '-m"initial gh-pages commit"']).on('close', function() {
-                            cp.spawn('git', ['checkout', 'master']).on('close', function() {
-                              done()
+                        cp.spawn('git', ['rm', '-rf', '.']).on('close', function() {
+                          cp.spawn('git', ['add', 'index.html']).on('close', function() {
+                            cp.spawn('git', ['commit', '-m"initial gh-pages commit"']).on('close', function() {
+                              cp.spawn('git', ['checkout', 'master']).on('close', function() {
+                                done()
+                              })
                             })
                           })
                         })
@@ -160,10 +162,12 @@ gulp.task('default', function(done) {
                     cp.spawn('git', ['remote', 'add', 'origin', url]).on('close', function() {
                       if (isTrue(answers.githubPages)) {
                         cp.spawn('git', ['checkout', '--orphan', 'gh-pages']).on('close', function() {
-                          cp.spawn('git', ['add', '-A']).on('close', function() {
-                            cp.spawn('git', ['commit', '-m"initial gh-pages commit"']).on('close', function() {
-                              cp.spawn('git', ['checkout', 'master']).on('close', function() {
-                                done()
+                          cp.spawn('git', ['rm', '-rf', '.']).on('close', function() {
+                            cp.spawn('git', ['add', 'index.html']).on('close', function() {
+                              cp.spawn('git', ['commit', '-m"initial gh-pages commit"']).on('close', function() {
+                                cp.spawn('git', ['checkout', 'master']).on('close', function() {
+                                  done()
+                                })
                               })
                             })
                           })
