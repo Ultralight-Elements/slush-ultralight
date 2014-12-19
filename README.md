@@ -39,7 +39,7 @@ $ slush ultralight
 [?] Copyright Holder
     ```
 
-Which will generate the following files:
+    Which will generate the following files:
 
     ```
 .
@@ -91,13 +91,13 @@ $ slush ultralight:register-bower
 $ slush ultralight:setup-sauce
     ```
 
-after which, you may use:
+    after which, you may use:
 
     ```sh
 $ gulp sauce
     ```
 
-from within your created project to initiate tests directly from your machine to saucelab's suite of browsers
+    from within your created project to initiate tests directly from your machine to saucelab's suite of browsers
 
  
 ## Contributing
