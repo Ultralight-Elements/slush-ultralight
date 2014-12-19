@@ -26,13 +26,13 @@ Or [download as ZIP](https://github.com/<%= githubFullRepoName %>/archive/master
 
 ## Usage
 
-1. Import the tiny (**2.6k** minified and gzipped) Ultralight-Elements platform:
+1. Import the tiny (**3.5k** minified and gzipped) Ultralight-Elements platform:
 
     ```html
     <script src="bower_components/Ultralight-Elements/ultralight-platform.min.js"></script>
     ```
 
-    or require ultralight-platform with **browserify** or your favorite **AMD** module loader
+    The ultralight platfrom and all ultralight elements are wrapped in a **UMD** wrapper, so they are also ready to be used with CommonJS module loaders like  **browserify**, or your favorite **AMD** module loader.
 
 2. Import Custom Element:
 
@@ -110,7 +110,7 @@ In order to run it locally you'll need to fetch some dependencies and a basic se
 
 ## History
 
-For detailed changelog, check [Releases](https://github.com/<%= githubUsername %>/<%= githubRepository %>/CHANGELOG.md).
+For detailed changelog, check [Releases](https://github.com/<%= githubFullRepoName %>/CHANGELOG.md).
 
 ## License
 
