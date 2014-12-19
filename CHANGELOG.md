@@ -1,12 +1,17 @@
-register npm
-READMES
-  name the tasks well
+TEST slush-ultralight
+  x git init
+  x initial gh-pages
+  gulp gh-pages
+download as zip
+template README
   talk about UMD
   add mention of travis.yml/saucelabs procedure
 'use strict'
 o add more license options
-o put deps in 'store' file bak in package.json
-- register at customelements.io
+o slush-ultralight README
+x name the tasks well
+x put deps in 'store' file bak in package.json
+x slush-ultralight readme
 x complex prototype
 x inny/outy style
 x add 6to5
@@ -14,7 +19,7 @@ x change browser-sync to connect
 x badges for elements
 x gh-pages
 x use ssh or https?
-x zip line 22 templates/README
+x zip line 22 templates/READMEcx
 x test generator
 x test server
 x DUH, switch to JSON file, lol!
@@ -34,4 +39,5 @@ x package.json
 x bower
 x test phantomjs
 x add badges to readme
+- register at customelements.io
 

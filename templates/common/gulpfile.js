@@ -14,8 +14,8 @@ var bump = require('gulp-bump')
 var git = require('gulp-git')
 var runSequence = require('run-sequence')
 var zip = require('gulp-zip')
-var ghpages = require('gulp-gh-pages');
-var to5Browserify = require('6to5-browserify')
+var cp = require('child_process')
+var to5Browserify = require('6to5ify')
 
 gulp.task('connect', function() {
   connect.server({
@@ -159,10 +159,22 @@ gulp.task('sauce', function(done) {
   }
 })
 
-gulp.task('gh-pages', function() {
-  return gulp.src('./**/*')
-    .pipe(ghpages())
+gulp.task('gh-pages', function(done) {
+  cp.spawn('git', ['checkout', 'gh-pages']).on('close', function() {
+    cp.spawn('git', ['checkout', 'master', 'index.html', 'bower_components', 'dist']).on('close', function() {
+      cp.spawn('git', ['add', 'index.html', 'bower_components', 'dist']).on('close', function() {
+        cp.spawn('git', ['commit', '-m"gh-pages commit"']).on('close', function() {
+          cp.spawn('git', ['push', 'origin', 'gh-pages']).on('close', function() {
+            cp.spawn('git', ['checkout', 'master']).on('close', function() {
+              done()
+            })
+          })
+        })
+      })
+    })
+  })
 })
+
 
 gulp.task('build', ['build-element'])
 gulp.task('test-local', function(done) {runSequence('build-element', 'connect', done)})
