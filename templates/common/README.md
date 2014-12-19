@@ -29,7 +29,7 @@ Or [download as ZIP](https://github.com/<%= githubFullRepoName %>/archive/master
 1. Import the tiny (**3.5k** minified and gzipped) Ultralight-Elements platform:
 
     ```html
-    <script src="bower_components/Ultralight-Elements/ultralight-platform.min.js"></script>
+    <script src="bower_components/ultralight-platform/dist/ultralight-platform.min.js"></script>
     ```
 
 The ultralight platfrom and all ultralight elements are wrapped in a **UMD** wrapper, so they are also ready to be used with CommonJS module loaders like  **browserify**, or your favorite **AMD** module loader.
