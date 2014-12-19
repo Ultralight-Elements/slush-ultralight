@@ -37,11 +37,9 @@ $ slush ultralight
 [?] Email:
 [?] License:
 [?] Copyright Holder
-
-
     ```
 
-    Which will generate the following files::
+Which will generate the following files:
 
     ```
 .
@@ -67,7 +65,7 @@ $ slush ultralight
 
     ```
 
-* The second one is used to scaffold an **individual custom element**:
+* A second one is used to scaffold an **individual custom element**:
 
     ```sh
 $ slush ultralight:element
@@ -78,7 +76,7 @@ $ slush ultralight:element
 [?] Use simple style or compact defineProperties style? 
    ```
 
-> _**Note**: files will be generated in the current directory, so be sure to change to a new directory before running those commands if you don't want to overwrite existing files._
+> _**Note**: files will be generated in the current directory, so be sure to change to a new directory before running those commands if you don't want to overwrite existing files.  To maximize your convenience, this directory should be named the same as your custom element._
 
 
 * Also included is a generator to help you register the custom element with bower
@@ -88,7 +86,7 @@ $ slush ultralight:register-bower
     ```
 
 
-* To set up local testing against saucelabs, you can use
+* To set up local testing with saucelabs, you can use
     ```sh
 $ slush ultralight:setup-sauce
     ```
