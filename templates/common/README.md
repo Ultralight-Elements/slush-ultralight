@@ -22,7 +22,7 @@ Install the component using [Bower](http://bower.io/):
 $ bower install <%= githubRepository %> --save
 ```
 
-Or [download as ZIP](https://github.com/<%= githubUsername %>/<%= githubRepository %>/archive/master.zip).
+Or [download as ZIP](https://github.com/<%= githubFullRepoName %>/archive/master.zip).
 
 ## Usage
 
