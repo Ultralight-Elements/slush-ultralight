@@ -270,5 +270,3 @@ gulp.task('setup-sauce', function(done) {
       })
   })
 })
-
-gulp.task('npm-register', function(done) {})
