@@ -18,6 +18,7 @@ If you haven't installed [slush](http://slushjs.github.io/#/) globally, you will
 ```sh
 $ [sudo] npm install -g slush
 ```
+
 ## Getting Started
 
 There are several generators available.
@@ -61,12 +62,13 @@ $ slush ultralight
 ├── src/
 │    └──<your-custom-element>.js
 ├── README.md
-├── .travis.yml
-└── tests
-    ├── functional
-    ├── intern.js
-    └── unit
-        └── tests.js
+├── tests
+│    ├── functional
+│    ├── intern.js
+│    └── unit
+│        └── tests.js
+└── .travis.yml
+
     ```
 
 * A second one is used to scaffold an **individual custom element**:
