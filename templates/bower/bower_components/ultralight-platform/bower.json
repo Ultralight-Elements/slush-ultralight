@@ -1,0 +1,34 @@
+{
+  "name": "ultralight-platform",
+  "description": "custom elements in pure vanillajs with tiny polyfill",
+  "version": "0.1.1",
+  "main": "dist/ultralight-plaform.js",
+  "license": "MIT",
+  "keywords": [
+    "web-components",
+    "webcomponents",
+    "web components",
+    "custom-elements",
+    "customelements",
+    "custom elements",
+    "elements",
+    "ultra-light",
+    "ultralight",
+    "ultralight-elements",
+    "ultralightelements",
+    "polymer",
+    "x-tags",
+    "bosonic",
+    "brick"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "gulpfile.js",
+    "index.html",
+    "package.json",
+    "src",
+    "tests"
+  ]
+}

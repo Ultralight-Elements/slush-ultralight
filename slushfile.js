@@ -135,26 +135,29 @@ gulp.task('default', function(done) {
       .pipe(gulp.dest('./'))
       .pipe(install())
       .on('finish', function() {
-        var url
-        if (isTrue(answers.gitInit)) {
-          cp.spawn('git', ['init']).on('close', function() {
-            cp.spawn('git', ['add', '-A']).on('close', function() {
-              cp.spawn('git', ['commit', '-m"initial commit"']).on('close', function() {
-                if (answers.gitProtocol === 'https') {
-                  url = 'https://github.com/' +  answers.githubFullRepoName
-                  cp.spawn('git', ['remote', 'add', 'origin', url]).on('close', function() {
-                    if (isTrue(answers.githubPages)) {
-                      cp.spawn('git', ['checkout', '-b', 'gh-pages']).on('close', function() {
-                        cp.spawn('git', ['add', '.']).on('close', function() {
-                          cp.spawn('git', ['commit', '-m"initial gh-pages commit"']).on('close', function() {
-                            cp.spawn('git', ['checkout', 'master']).on('close', function() {
-                              done()
+        gulp.src('../templates/bower/**/*')
+        .pipe(gulp.dest('./'))
+        .on('finish', function() {
+          var url
+          if (isTrue(answers.gitInit)) {
+            cp.spawn('git', ['init']).on('close', function() {
+              cp.spawn('git', ['add', '-A']).on('close', function() {
+                cp.spawn('git', ['commit', '-m"initial commit"']).on('close', function() {
+                  if (answers.gitProtocol === 'https') {
+                    url = 'https://github.com/' +  answers.githubFullRepoName
+                    cp.spawn('git', ['remote', 'add', 'origin', url]).on('close', function() {
+                      if (isTrue(answers.githubPages)) {
+                        cp.spawn('git', ['checkout', '-b', 'gh-pages']).on('close', function() {
+                          cp.spawn('git', ['add', '.']).on('close', function() {
+                            cp.spawn('git', ['commit', '-m"initial gh-pages commit"']).on('close', function() {
+                              cp.spawn('git', ['checkout', 'master']).on('close', function() {
+                                done()
+                              })
                             })
                           })
                         })
-                      })
-                    }
-                  })
+                      }
+                    })
                   } else if (answers.gitProtocol === 'ssh') {
                     url = 'git@github.com:' + answers.githubFullRepoName + '.git'
                     cp.spawn('git', ['remote', 'add', 'origin', url]).on('close', function() {
@@ -171,10 +174,11 @@ gulp.task('default', function(done) {
                       }
                     })
                   }
+                })
               })
             })
-          })
-        }
+          }
+        })
       })
   })
 })

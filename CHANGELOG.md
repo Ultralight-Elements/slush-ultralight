@@ -1,10 +1,15 @@
+    "browserify": "^7.0.0",
+	"intern": "^2.2.2",
+	    "gulp": "^3.8.7",
+    "6to5ify": "^2.0.0",
+
 TEST slush-ultralight
   x git init
   x initial gh-pages
-  gulp gh-pages
+  x gulp gh-pages
 download as zip
 template README
-  talk about UMD
+  x talk about UMD
   add mention of travis.yml/saucelabs procedure
 'use strict'
 o add more license options
