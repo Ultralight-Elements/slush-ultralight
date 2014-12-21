@@ -9,13 +9,13 @@
 
 Install this generator using NPM:
 
-```sh
+```
 $ [sudo] npm install -g slush-ultralight
 ```
 
 If you haven't installed [slush](http://slushjs.github.io/#/) globally, you will also need  to install that as well
 
-```sh
+```
 $ [sudo] npm install -g slush
 ```
 
@@ -25,7 +25,7 @@ There are several generators available.
 
 * The first one is used to scaffold out an **entire project**, and tries to offer sensible defaults
 
-    ```sh
+    ```
 $ slush ultralight
     ```
 
@@ -73,7 +73,7 @@ $ slush ultralight
 
 * A second one is used to scaffold an **individual custom element**:
 
-    ```sh
+    ```
 $ slush ultralight:element
     ```
 
@@ -87,19 +87,19 @@ $ slush ultralight:element
 
 * Also included is a generator to help you register the custom element with bower
 
-    ```sh
+    ```
 $ slush ultralight:register-bower
     ```
 
 
 * To set up local testing with saucelabs, you can use
-    ```sh
+    ```
 $ slush ultralight:setup-sauce
     ```
 
     after which, you may use:
 
-    ```sh
+    ```
 $ gulp test-sauce
     ```
 
@@ -112,4 +112,4 @@ Join us at https://github.com/Ultralight-Elements
 
 ## License
 
-MIT License © 2014, The Ultralight-Element authors, based on the [slush-element](https://github.com/webcomponents/slush-element) project, Copyright (c) 2014, Beto Muniz
+MIT License © 2014, The Ultralight-Element authors, based on the [slush-element](https://github.com/webcomponents/slush-element) project, Copyright © 2014, Beto Muniz
