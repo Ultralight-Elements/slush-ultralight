@@ -112,4 +112,4 @@ Join us at https://github.com/Ultralight-Elements
 
 ## License
 
-MIT License © 2014, The Ultralight-Element authors, based on the slush-elements, Copyright (c) 2014, Beto Muniz
+MIT License © 2014, The Ultralight-Element authors, based on the [slush-element](https://github.com/webcomponents/slush-element) project, Copyright (c) 2014, Beto Muniz
