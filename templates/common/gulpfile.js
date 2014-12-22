@@ -175,9 +175,20 @@ gulp.task('gh-pages', function(done) {
   })
 })
 
+gulp.task('test', function() {
+  gulp.src('./node_modules/intern/client.html')
+    .pipe(connect.reload())
+})
+
+gulp.task('watch', function() {
+  gulp.watch(['./tests/unit/*.js', './dist/*.min.js'], ['test'])
+  gulp.watch(['./src/*.js'], ['build'])
+})
+
+gulp.task('default', ['connect', 'watch'])
 
 gulp.task('build', ['build-element', 'build-element-min'])
-gulp.task('test-local', function(done) {runSequence('build-element', 'connect', done)})
+gulp.task('test-local', function(done) {runSequence('build', 'connect', 'test', 'watch', done)})
 gulp.task('test-sauce', ['sauce'])
 gulp.task('release-patch', function(done) {runSequence('bump-patch', 'tag', 'npm', done)})
 gulp.task('release-minor', function(done) {runSequence('bump-minor', 'tag', 'npm', done)})
