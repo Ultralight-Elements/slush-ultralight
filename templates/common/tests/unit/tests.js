@@ -3,7 +3,7 @@ define([
   'intern/chai!expect',
   'platform/ultralight-platform.min',
   'customelement/<%= elementName %>.min'
-], function(bdd, expect, element) {
+], function(bdd, expect, platform, element) {
   var describe = bdd.describe.bind(bdd)
   var it = bdd.it.bind(bdd)
 
