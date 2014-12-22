@@ -32,7 +32,7 @@ Or [download as ZIP](https://github.com/<%= githubFullRepoName %>/archive/master
     <script src="bower_components/ultralight-platform/dist/ultralight-platform.min.js"></script>
     ```
 
-The ultralight platfrom and all ultralight elements are wrapped in a **UMD** wrapper, so they are also ready to be used with CommonJS module loaders like  **browserify**, or your favorite **AMD** module loader.
+    The ultralight platfrom and all ultralight elements are wrapped in a **UMD** wrapper, so they are also ready to be used with CommonJS module loaders like  **browserify**, or your favorite **AMD** module loader.
 
 
 2. Import Custom Element:
