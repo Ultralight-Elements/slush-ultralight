@@ -176,7 +176,7 @@ gulp.task('gh-pages', function(done) {
 })
 
 
-gulp.task('build', ['build-element'])
+gulp.task('build', ['build-element', 'build-element-min'])
 gulp.task('test-local', function(done) {runSequence('build-element', 'connect', done)})
 gulp.task('test-sauce', ['sauce'])
 gulp.task('release-patch', function(done) {runSequence('bump-patch', 'tag', 'npm', done)})
